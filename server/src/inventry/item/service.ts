@@ -24,7 +24,7 @@ export class ItemService  {
     }
     
     async findAll(): Promise<Item[]> {
-        return await this.repo.find();
+        return await this.repo.find( { relations: [ 'location' ] } );
     }
 
     async delete( ids: number[] ): Promise<void> {

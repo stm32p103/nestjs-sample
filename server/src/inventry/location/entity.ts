@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 
 import { EntityCommon } from '../common';
+import { Item } from '../item/entity';
 
 @Entity()
 export class Location extends EntityCommon {
@@ -19,44 +20,11 @@ export class Location extends EntityCommon {
     @Column()
     description: string;
 
+    @OneToMany( type=>Item, item=>item.location )
+    readonly items?: Item[];  // 置かれている備品
+    
     constructor( init?: Partial<Location> ) {
-        super( init );
-        Object.assign(this, init);
+        super();
+        Object.assign( this, init );
     }
 }
-
-//@Entity()
-//export class Photo {
-//    @PrimaryGeneratedColumn()
-//    readonly id?: number;
-//
-//    @CreateDateColumn()
-//    readonly createdAt?: Date;
-//
-//    @UpdateDateColumn()
-//    readonly updatedAt?: Date;
-//    
-//    @Column( { length: 128 } )
-//    caption: string;
-//
-//    @Column( { length: 32 } )
-//    file: string;
-//    
-//    @Column()
-//    itemId: number;
-//    
-//    @OneToMany( type => Item, item => item.photos )
-//    @JoinColumn({ name: 'itemId' })
-//    item?: Item;
-//    
-//    constructor( init?: Partial<Photo> ) {
-//        Object.assign(this, init);
-//    }
-//}
-//
-//@Column( { nullable: true } )
-//lid?: number;
-//
-//@ManyToOne( type => Location, location => location.items )
-//@JoinColumn( { name: 'lid' } )
-//location?: Location;

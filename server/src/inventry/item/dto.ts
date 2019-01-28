@@ -11,4 +11,9 @@ export class ItemDto {
         required: false
     } )
     description?: string;
+
+    @ApiModelProperty( {
+        required: false
+    } )
+    locationId?: number;
 }

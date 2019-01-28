@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Entities, Controllers, Services } from './aggregation';
+import { Entities, Controllers, Services } from './@aggregation';
 
 function ToArray( obj: Object ) {
     return Object.keys( obj ).map( key => obj[key] );
