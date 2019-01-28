@@ -32,6 +32,9 @@ export class Item extends EntityCommon {
     constructor( init?: Partial<Item> ) {
         super();
         Object.assign( this, init );
-        console.log( this.joinables );
+        console.log( Item.Joinables );
+        
+        let joins = Item.FilterJoinable( ['item', 'location'] );
+        console.log( joins );
     }
 }
