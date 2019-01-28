@@ -22,7 +22,7 @@ export class EntityCommon {
     static Joinables: string[];   // @Joinable()を付けることで、findでJoin可能であることを示す
 
     static FilterJoinable( keys: string[] ): string[] {
-        return keys.filter( key => this.Joinables.find( joinable => joinable === key ) );
+        return keys.filter( key => this.Joinables.indexOf( key ) >= 0 );
     }
     
     @PrimaryGeneratedColumn()

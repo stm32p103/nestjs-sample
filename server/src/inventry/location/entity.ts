@@ -9,7 +9,7 @@ import {
     ManyToOne
 } from 'typeorm';
 
-import { EntityCommon } from '../common';
+import { EntityCommon, Joinable } from '../common';
 import { Item } from '../item/entity';
 
 @Entity()
@@ -20,6 +20,7 @@ export class Location extends EntityCommon {
     @Column()
     description: string;
 
+    @Joinable()
     @OneToMany( type=>Item, item=>item.location )
     readonly items?: Item[];  // 置かれている備品
     
