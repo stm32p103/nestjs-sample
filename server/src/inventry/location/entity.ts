@@ -12,14 +12,14 @@ import {
 import { EntityCommon } from '../common';
 
 @Entity()
-export class Item extends EntityCommon {
+export class Location extends EntityCommon {
     @Column( { length: 128 } )
     name: string;
     
     @Column()
     description: string;
 
-    constructor( init?: Partial<Item> ) {
+    constructor( init?: Partial<Location> ) {
         super( init );
         Object.assign(this, init);
     }

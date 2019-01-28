@@ -1,7 +1,6 @@
 import { ApiModelProperty, ApiResponse } from '@nestjs/swagger';
-import { Item } from './entity';
 
-export class ItemDto {
+export class LocationDto {
     @ApiModelProperty( {
         required: false
     } )
