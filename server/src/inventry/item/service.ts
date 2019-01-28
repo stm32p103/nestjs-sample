@@ -6,7 +6,7 @@ import { Item } from './entity';
 
 @Injectable()
 export class ItemService  {
-    private filter( option?: { join?: string[] } ): string[] {
+    private filter( option: { join?: string[] } ): string[] {
         let keys:string[] = [];
     console.log(option)
         if( option && option.join ) {

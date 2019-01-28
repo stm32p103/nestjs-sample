@@ -10,6 +10,11 @@ import { ItemService } from './service';
 @Controller('items')
 export class ItemController {
     constructor(private readonly items: ItemService ) {}
+    @Get('/joinables')
+    getJoinables(): string[] {
+        return Item.Joinables;
+    }
+    
     @Get()
     async findAll( @Query() option?: GetQueryDto ):  Promise<Item[]> {
         let join = [];
