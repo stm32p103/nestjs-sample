@@ -1,7 +1,8 @@
-import { Get, Post, Patch, Delete, Body, Controller, Param, HttpException, HttpStatus } from '@nestjs/common';
+import { Get, Post, Patch, Delete, Body, Controller, Param, HttpException, HttpStatus, Query, Optional } from '@nestjs/common';
 import { ApiUseTags } from '@nestjs/swagger';
 
-import { ItemDto, ItemCreateResult } from './dto';
+import { GetQueryDto } from '../common/dto';
+import { ItemDto } from './dto';
 import { Item } from './entity';
 import { ItemService } from './service';
 
@@ -10,14 +11,23 @@ import { ItemService } from './service';
 export class ItemController {
     constructor(private readonly items: ItemService ) {}
     @Get()
-    async findAll():  Promise<Item[]> {
-        return await this.items.findAll();
+    async findAll( @Query() option?: GetQueryDto ):  Promise<Item[]> {
+        let join = [];
+        if( option && option.join ) {
+            join = option.join.split(',');
+        }
+        return await this.items.findAll({ join: join });
     }
 
     @Get(':id')
-    async getById( @Param('id') id: number ):  Promise<Item> {
+    async getById( @Param('id') id: number, @Query() option?: GetQueryDto ):  Promise<Item> {
+        let join = [];
+        if( option && option.join ) {
+            join = option.join.split(',');
+        }
+        
         try {
-            return await this.items.findOneById( id );
+            return await this.items.findOneById( id, { join: join } );
         } catch( e ) {
             throw new HttpException( 'Entity Not Found', HttpStatus.NOT_FOUND );
         }
